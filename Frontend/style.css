@@ -406,8 +406,8 @@ p {
 
 .hero {
     min-height: min(850px, calc(100vh - 20px));
-    margin-top: 18px;
-    padding: 145px max(7vw, 40px) 120px;
+    margin-top: 0px;
+    padding: 90px max(7vw, 40px) 120px;
 
     display: flex;
     align-items: center;
@@ -2337,6 +2337,91 @@ body.cursor-hover .cursor-ambience {
 
     .feature-card p {
         min-height: auto;
+    }
+
+}
+/* =========================================================
+   MOBILE FIX — ABOUT / EXPERTISE FEATURE CARDS
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    /* Feature section */
+    .features,
+    .expertise,
+    .about-features {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    /* Feature cards */
+    .feature-card {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+
+        min-height: auto !important;
+
+        padding: 34px 30px 32px !important;
+
+        margin-bottom: 24px !important;
+
+        text-align: left !important;
+    }
+
+    /* Feature icon */
+    .feature-card .feature-icon {
+        position: relative !important;
+
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+
+        transform: none !important;
+
+        width: 58px !important;
+        height: 58px !important;
+
+        min-width: 58px !important;
+        min-height: 58px !important;
+
+        margin: 0 0 24px 0 !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        z-index: 2 !important;
+
+        flex-shrink: 0 !important;
+    }
+
+    /* Heading */
+    .feature-card h3 {
+        position: relative !important;
+
+        margin: 0 0 12px 0 !important;
+
+        width: 100% !important;
+
+        line-height: 1.25 !important;
+
+        z-index: 3 !important;
+    }
+
+    /* Description */
+    .feature-card p {
+        position: relative !important;
+
+        margin: 0 !important;
+
+        width: 100% !important;
+
+        line-height: 1.65 !important;
+
+        z-index: 3 !important;
     }
 
 }
