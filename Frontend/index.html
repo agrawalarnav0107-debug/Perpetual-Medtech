@@ -1,345 +1,730 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Perpetual Medtech — healthcare innovation in oncology, cardiology, medical technology, research, and patient-focused solutions.">
     <title>Perpetual Medtech | Healthcare Innovation</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <!-- Scroll Progress -->
     <div class="scroll-progress"></div>
-    <!-- Navbar -->
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
     <header class="navbar">
+
         <div class="logo">
-            <a href="home">
-            <img src="Images/main-logo.jpeg" alt="Perpetual Medtech Logo">
+            <a href="#home" aria-label="Perpetual Medtech Home">
+                <img src="Images/main-logo.jpeg" alt="Perpetual Medtech Logo">
             </a>
         </div>
-        <nav class="nav-links" id="navLinks">
+
+        <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#products">Products</a>
             <a href="#research">Research</a>
-            <a href="#contact">Contact</a>
+            <!--<a href="#team">Team</a>-->
+            
         </nav>
-        <button class="menu-btn" id="menuBtn" aria-label="Open Navigation Menu">
+
+        <a href="#contact" class="nav-btn">
+            Contact Us
+        </a>
+
+        <button
+            class="menu-btn"
+            id="menuBtn"
+            type="button"
+            aria-label="Open Navigation Menu"
+            aria-expanded="false"
+        >
             ☰
         </button>
+
     </header>
-    <!-- Main Content -->
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
     <main>
-        <!-- Hero Content -->
+
+        <!-- =========================
+             HERO
+        ========================== -->
         <section class="hero" id="home">
+
             <div class="hero-glow"></div>
-                <div class="hero-content">
-                    <p class="hero-tag">INNOVATION • TECHNOLOGY • HEALTHCARE</p>
-                    <h1>Transforming Healthcare 
-                        Through Innovation
-                    </h1>
-                    <p class="hero-description">
-                        At Perpetual Medtech, we are dedicated to advancing healthcare through continuous innovation in oncology and cardiology. Our mission is to develop medical technologies that empower clinicians, improve patient outcomes, and redefine what is possible in modern care.</p>
-                    
-                    <div class="hero-buttons">
-                        <a href="#products" class="btn-primary">
-                            Explore Our Products
-                        </a>
-                        <a href="#about" class="btn-secondary">
-                            Discover More
-                        </a>
+
+            <div class="hero-content">
+
+                <p class="hero-tag">
+                    INNOVATION • TECHNOLOGY • HEALTHCARE
+                </p>
+
+                <h1>
+                    Transforming Healthcare
+                    Through Innovation
+                </h1>
+
+                <p class="hero-description">
+                    At Perpetual Medtech, we are dedicated to advancing healthcare through continuous innovation in oncology and cardiology. Our mission is to develop medical technologies that empower clinicians, improve patient outcomes, and redefine what is possible in modern care.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#products" class="btn-primary">
+                        Explore Our Products
+                    </a>
+
+                    <a href="#about" class="btn-secondary">
+                        Discover More
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ABOUT / INNOVATION
+        ========================== -->
+        <section class="innovation" id="about">
+
+            <div class="ambient ambient-one"></div>
+            <div class="ambient ambient-two"></div>
+
+            <div class="section-heading reveal">
+
+                <p class="section-tag">
+                    OUR EXPERTISE
+                </p>
+
+                <h2>
+                    Driving Innovation in Healthcare
+                </h2>
+
+                <p>
+                    Innovation is at the heart of everything we do. Our team of engineers, researchers, and healthcare experts works closely together to design and deliver medical devices that combine precision, reliability, and compassion.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <!-- Feature Card 1 -->
+                <div class="feature-card reveal-scale">
+
+                    <div class="feature-icon">
+                        🔬
                     </div>
-                </div>
-            </section>
-            <!-- About -->
-            <section class="innovation" id="about">
-                <div class="ambient ambient-one"></div>
-                <div class="ambient ambient-two"></div>
-                <div class="section-heading reveal">
-                    <p class="section-tag">
-                        Our Expertise
-                    </p>
-                    <h2>
-                        Driving Innovation in Healthcare
-                    </h2>
+
+                    <h3>
+                        Research & Development
+                    </h3>
+
                     <p>
-                        Innovation is at the heart of everything we do. Our team of engineers, researchers, and healthcare experts works closely together to design and deliver medical devices that combine precision, reliability, and compassion.
+                        Exploring new ideas and technologies to develop innovative healthcare solutions.
                     </p>
+
                 </div>
-                <div class="feature-grid">
-                    <!-- Card 1 -->
-                    <div class="feature-card reveal-scale">
-                        <div class="feature-icon">
-                        </div>
-                        <div class="feature-icon">
+
+
+                <!-- Feature Card 2 -->
+                <div class="feature-card reveal-scale">
+
+                    <div class="feature-icon">
+                        🏥
+                    </div>
+
+                    <h3>
+                        Healthcare Solutions
+                    </h3>
+
+                    <p>
+                        Creating solutions focused on healthcare needs and patient care.
+                    </p>
+
+                </div>
+
+
+                <!-- Feature Card 3 -->
+                <div class="feature-card reveal-scale">
+
+                    <div class="feature-icon">
+                        🌐
+                    </div>
+
+                    <h3>
+                        Global Innovation
+                    </h3>
+
+                    <p>
+                        Building scalable solutions for a connected healthcare ecosystem.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRODUCTS
+        ========================== -->
+        <section class="products" id="products">
+
+            <div class="section-heading reveal">
+
+                <p class="section-tag">
+                    OUR PRODUCTS
+                </p>
+
+                <h2>
+                    Technology Designed for Better Healthcare
+                </h2>
+
+                <p>
+                    Explore our growing portfolio of innovative healthcare technologies.
+                </p>
+
+            </div>
+
+            <!-- Products are loaded from the FastAPI + PostgreSQL backend -->
+            <div class="products-grid" id="productsGrid"></div>
+
+        </section>
+
+
+        <!-- =========================
+             RESEARCH
+        ========================== -->
+        <section class="research" id="research">
+
+            <div class="research-container">
+
+                <!-- Research Content -->
+                <div class="research-content reveal-left">
+
+                    <p class="section-tag">
+                        RESEARCH & DEVELOPMENT
+                    </p>
+
+                    <h2>
+                        Advancing Healthcare Through Research
+                    </h2>
+
+                    <p>
+                        At Perpetual Medtech, research and innovation are at the heart of our approach to healthcare technology. We focus on developing solutions that address evolving healthcare requirements.
+                    </p>
+
+                    <p>
+                        Our approach combines technology, research and practical healthcare applications to create solutions designed for the future.
+                    </p>
+
+                    <a href="#contact" class="btn-primary">
+                        Connect With Us
+                    </a>
+
+                </div>
+
+
+                <!-- Research Visual -->
+                <div class="research-visual reveal-right">
+
+                    <div class="research-card">
+
+                        <div class="research-icon">
                             🔬
                         </div>
-                        <h3>Research & Development</h3>
-                        <p>Exploring new ideas and technologies tp develop innovative solutions.</p>
+
+                        <h3>
+                            Innovation
+                        </h3>
+
+                        <p>
+                            Exploring new technologies and ideas for next-generation healthcare solutions.
+                        </p>
+
                     </div>
-                    <!-- Card 2 -->
-                    <div class="feature-card reveal-scale">
-                        <div class="feature-icon">
+
+
+                    <div class="research-card">
+
+                        <div class="research-icon">
+                            🧬
                         </div>
-                        <div class="feature-icon">
-                            🏥
-                        </div>
-                        <h3>Healthcare Solutions</h3>
-                        <p>Creating solutions focused on healthcare needs and patient care.</p>
+
+                        <h3>
+                            Research
+                        </h3>
+
+                        <p>
+                            Developing knowledge-driven approaches to address modern healthcare challenges.
+                        </p>
+
                     </div>
-                    <!-- Card 3 -->
-                    <div class="feature-card reveal-scale">
-                        <div class="feature-icon">
+
+
+                    <div class="research-card">
+
+                        <div class="research-icon">
+                            ⚕
                         </div>
-                        <div class="feature-icon">
-                            🌐
-                        </div>
-                        <h3>Global Innovation</h3>
-                        <p>Building scalable solutions for a connected healthcare ecosystem.</p>
+
+                        <h3>
+                            Patient Focus
+                        </h3>
+
+                        <p>
+                            Keeping patient needs and healthcare outcomes at the center of innovation.
+                        </p>
+
                     </div>
+
                 </div>
-            </section>
-            <!-- Products Section -->
-            <section class="products" id="products">
-                <div class="section-heading reveal">
-                    <p class="section-tag">Our Products</p>
-                    <h2> Technology Designed for Better Healthcare </h2>
-                    <p> Exploring our growing portfolio of innovative healthcare technologies </p>
-                </div>
-                <div class="products-grid" id="productsGrid">
-                </div>
-            </section>
-            <!-- RESEARCH SECTION -->
-            <section class="research" id="research">
-            <div class="research-container">
-            <!-- Research Content -->
-            <div class="research-content reveal-left">
+
+            </div>
+
+        </section>
+
+<!--==============================
+     Launch to be later 
+==================================
+
+        Team Details 
+        <section class="team" id="team">
+
+            <div class="section-heading reveal">
+
                 <p class="section-tag">
-                Research & Development
+                    OUR TEAM
                 </p>
-                    <h2>
-                Advancing Healthcare Through Research
-                    </h2>
+
+                <h2>
+                    Meet the People Behind
+                    Perpetual Medtech
+                </h2>
+
                 <p>
-                At Perpetual Medtech, research and innovation are at
-                the heart of our approach to healthcare technology.
-                We focus on developing solutions that address
-                evolving healthcare requirements.
+                    A multidisciplinary team combining healthcare, technology, research, and innovation to develop solutions for the future of healthcare.
                 </p>
-                <p>
-                Our approach combines technology, research and
-                practical healthcare applications to create
-                solutions designed for the future.
-                </p>
-                    <a href="#contact" class="btn-primary">
-                Connect With Us
-                    </a>
+
             </div>
 
-        <!-- Research Visual -->
-        <div class="research-visual reveal-right">
-            <div class="research-card">
-                <div class="research-icon">
-                    🔬
-                </div>
-                <h3>
-                    Innovation
-                </h3>
-                <p>
-                    Exploring new technologies and ideas for
-                    next-generation healthcare solutions.
-                </p>
-            </div>
-            <div class="research-card">
-                <div class="research-icon">
-                    🧬
-                </div>
-                <h3>
-                    Research
-                </h3>
-                <p>
-                    Developing knowledge-driven approaches to
-                    address modern healthcare challenges.
-                </p>
-            </div>
-            <div class="research-card">
-                <div class="research-icon">
-                    ⚕
-                </div>
-                <h3>
-                    Patient Focus
-                </h3>
-                <p>
-                    Keeping patient needs and healthcare outcomes
-                    at the center of innovation.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-            </section>
-            <!-- CONTACT SECTION -->
 
-<section class="contact" id="contact">
-    <div class="section-heading reveal">
-        <p class="section-tag">
-            Get in Touch
-        </p>
-        <h2>
-            Let's Connect
-        </h2>
-        <p>
-            Have a question about our products, research, or
-            healthcare solutions? Our team would be happy to
-            hear from you.
-        </p>
-    </div>
-    <div class="contact-container">
+            <div class="team-grid">
 
-        <!-- Contact Information -->
-        <div class="contact-info reveal-left">
-            <span class="contact-label">
-                Contact Perpetual Medtech
-            </span>
-            <h3>
-                Let's build the future of healthcare together.
-            </h3>
-            <p>
-                Whether you are interested in our products,
-                research, partnerships, or other opportunities,
-                send us a message and our team will get back
-                to you.
-            </p>
-             <div class="contact-detail">
-                <span class="contact-detail-icon">
-                    ✉
-                </span>
-                <div>
-                    <strong>Email</strong>
-                    <p>
-                        info@perpetualmed.com
-                    </p>
-                </div>
-            </div>
-            <div class="contact-detail">
-                <span class="contact-detail-icon">
-                    ☎
-                </span>
-                <div>
-                    <strong>Phone</strong>
-                    <p>
-                        +91-8878868688
-                    </p>
-                </div>
-            </div>
-            <div class="contact-detail">
-                <span class="contact-detail-icon">
-                    📍
-                </span>
-                <div>
-                    <strong>Location</strong>
-                    <p>
-                        PH 17, Survey No 80, 79/1 101, Panchal Compound, Lasudia Mori, Indore, Madhya Pradesh 453771
-                    </p>
-                </div>
-            </div>
-        </div>
+                Team Member 1
+                <article class="team-card reveal-scale">
 
-        <!-- Contact Form -->
-        <div class="contact-form-wrapper reveal-right">
-            <form
-                class="contact-form"
-                id="contactForm"
-                novalidate
-            >
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">
-                            Name
-                        </label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Your Name"
-                            required
-                        >
+                    <div class="team-avatar">
+                        PA
                     </div>
-                    <div class="form-group">
-                        <label for="email">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Your Email"
-                            required
-                        >
+
+                    <div class="team-content">
+
+                        <span class="team-role">
+                            CHIEF EXECUTIVE OFFICER
+                        </span>
+
+                        <h3>
+                            Palkesh Agrawal
+                        </h3>
+
+                        <p>
+                            Leading the organization's vision and strategic direction with a focus on healthcare innovation and sustainable growth.
+                        </p>
+
                     </div>
+
+                </article>
+
+
+                Team Member 2
+                <article class="team-card reveal-scale">
+
+                    <div class="team-image">
+                        <div class="team-avatar">
+                            CA
+                        </div>
+                    </div>
+
+                    <div class="team-content">
+
+                        <span class="team-role">
+                            CHIEF TECHNOLOGY OFFICER
+                        </span>
+
+                        <h3>
+                            Chahat Agrawal
+                        </h3>
+
+                        <p>
+                            Driving technology strategy and developing innovative digital solutions for modern healthcare environments.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                Team Member 3 
+                <article class="team-card reveal-scale">
+
+                    <div class="team-image">
+                        <div class="team-avatar">
+                            AK
+                        </div>
+                    </div>
+
+                    <div class="team-content">
+
+                        <span class="team-role">
+                            HEAD OF RESEARCH
+                        </span>
+
+                        <h3>
+                            Abhishek Koshti
+                        </h3>
+
+                        <p>
+                            Focused on research, product development, and translating emerging technologies into practical healthcare solutions.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                Team Member 4 
+                <article class="team-card reveal-scale">
+
+                    <div class="team-image">
+                        <div class="team-avatar">
+                            RT
+                        </div>
+                    </div>
+
+                    <div class="team-content">
+
+                        <span class="team-role">
+                            PRODUCT & OPERATIONS
+                        </span>
+
+                        <h3>
+                            Raj Tomar
+                        </h3>
+
+                        <p>
+                            Coordinating product development and operational initiatives to ensure reliable and effective healthcare solutions.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                Team Member 5 
+                <article class="team-card reveal-scale">
+
+                    <div class="team-image">
+                        <div class="team-avatar">
+                            YJ
+                        </div>
+                    </div>
+
+                    <div class="team-content">
+
+                        <span class="team-role">
+                            MEDICAL TECHNOLOGY LEAD
+                        </span>
+
+                        <h3>
+                            Yashita Joshi
+                        </h3>
+
+                        <p>
+                            Working across medical technology and product initiatives to support innovative healthcare solutions and user-focused development.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+ 
+     =============================-->
+
+        <!-- =========================
+             CONTACT
+        ========================== -->
+        <section class="contact" id="contact">
+
+            <div class="section-heading reveal">
+
+                <p class="section-tag">
+                    GET IN TOUCH
+                </p>
+
+                <h2>
+                    Let's Connect
+                </h2>
+
+                <p>
+                    Have a question about our products, research, or healthcare solutions? Our team would be happy to hear from you.
+                </p>
+
+            </div>
+
+
+            <div class="contact-container">
+
+                <!-- Contact Information -->
+                <div class="contact-info reveal-left">
+
+                    <span class="contact-label">
+                        Contact Perpetual Medtech
+                    </span>
+
+                    <h3>
+                        Let's build the future of healthcare together.
+                    </h3>
+
+                    <p>
+                        Whether you are interested in our products, research, partnerships, or other opportunities, send us a message and our team will get back to you.
+                    </p>
+
+
+                    <div class="contact-detail">
+
+                        <span class="contact-detail-icon">
+                            ✉
+                        </span>
+
+                        <div>
+                            <strong>Email</strong>
+                            <p>
+                                info@perpetualmed.com
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-detail">
+
+                        <span class="contact-detail-icon">
+                            ☎
+                        </span>
+
+                        <div>
+                            <strong>Phone</strong>
+                            <p>
+                                +91 - 88788 68688
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-detail">
+
+                        <span class="contact-detail-icon">
+                            📍
+                        </span>
+
+                        <div>
+                            <strong>Location</strong>
+                            <p>
+                                PH 17, Survey No 80, 79/1, 101, Panchal Compound, Lasudia, Indore, Madhya Pradesh 453771
+                            </p>
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <label for="subject">
-                        Subject
-                    </label>
-                    <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        placeholder="How can we help?"
-                        required
+
+
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper reveal-right">
+
+                    <form
+                        class="contact-form"
+                        id="contactForm"
+                        novalidate
                     >
-                </div>
-                <div class="form-group">
-                    <label for="message">
-                        Message
-                    </label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="6"
-                        placeholder="Write your message..."
-                        required
-                    ></textarea>
-                </div>
-                <button
-                    type="submit"
-                    class="form-submit"
-                >
-                    Send Message
-                    <span>→</span>
-                </button>
-                <p
-                    id="formMessage"
-                    class="form-message"
-                ></p>
-            </form>
-        </div>
-    </div>
 
-</section>
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="name">
+                                    Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="Your Name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="email">
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Your Email"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="subject">
+                                Subject
+                            </label>
+
+                            <input
+                                type="text"
+                                id="subject"
+                                name="subject"
+                                placeholder="How can we help?"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="message">
+                                Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="6"
+                                placeholder="Write your message..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="form-submit"
+                        >
+                            Send Message
+                            <span>→</span>
+                        </button>
+
+                        <p
+                            id="formMessage"
+                            class="form-message"
+                        ></p>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
     </main>
-    <footer><div class="footer-content">
-        <div class="footer-brand">
-            <h3>Perpetual Medtech</h3>
-            <p>Innovative for a healthier future</p>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <h3>
+                    Perpetual Medtech
+                </h3>
+
+                <p>
+                    Innovative for a healthier future
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#products">Products</a>
+                <a href="#research">Research</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact</a>
+
+            </div>
+
+
+            <div class="social-links">
+
+                <a
+                    href="https://in.linkedin.com/company/perpetual-medtech"
+                    target="_blank"
+                    aria-label="LinkedIn"
+                    rel="noopener noreferrer"
+                >
+                    LinkedIn
+                </a>
+
+            </div>
+
         </div>
-        <div class="footer-links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#products">Products</a>
-            <a href="#research">Research</a>
-            <a href="#contact">Contact</a>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Perpetual Medtech. All Rights Reserved.
+            </p>
+
         </div>
-        <div class="social-links">
-            <a href="https://in.linkedin.com/company/perpetual-medtech" target="blank" aria-label="LinkedIn" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>© 2026 Perpetual Medtech.
-                All Rights Reserved.</p>
-    </div>
-</footer>
-    <!-- Java Script-->
+
+    </footer>
+
+
+    <!-- JavaScript -->
     <script src="script.js"></script>
+
 </body>
 </html>
