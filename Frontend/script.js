@@ -1,556 +1,1057 @@
-/* PERPETUAL MEDTECH - MAIN JAVASCRIPT */
+/* =========================================================
+   PERPETUAL MEDTECH — FINAL FRONTEND SCRIPT
+   =========================================================
+   Includes:
+   - Mobile navigation
+   - Smooth navigation
+   - Scroll progress
+   - Scroll reveal animations
+   - Product API loading
+   - Product image loading
+   - Contact form submission
+   - Form validation
+   - Live cursor ambience
+   - Cursor hover effects
+   ========================================================= */
 
-
-/* 1. PAGE LOAD */
 const API_BASE_URL = "https://perpetual-medtech.vercel.app";
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    console.log("Perpetual Medtech website loaded successfully.");
-
-});
-
-
-/* 2. MOBILE NAVIGATION */
-
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
-
-if (menuBtn && navLinks) {
-
-    menuBtn.addEventListener("click", function () {
-
-        navLinks.classList.toggle("active");
-
-    });
-
-}
-
-
-/* 3. CLOSE MOBILE NAVIGATION AFTER CLICKING A LINK */
-
-if (navLinks) {
-
-    const navigationLinks = navLinks.querySelectorAll("a");
-
-    navigationLinks.forEach(function (link) {
-
-        link.addEventListener("click", function () {
-
-            navLinks.classList.remove("active");
-
-        });
-
-    });
-
-}
-
-
-/* 4. NAVBAR SCROLL EFFECT */
-
-const navbar = document.querySelector(".navbar");
-
-window.addEventListener("scroll", function () {
-
-    if (!navbar) {
-        return;
-    }
-
-    if (window.scrollY > 50) {
-
-        navbar.classList.add("scrolled");
-
-    } else {
-
-        navbar.classList.remove("scrolled");
-
-    }
-
-});
-
-
-/* 5. SCROLL PROGRESS BAR */
-
-const scrollProgress = document.querySelector(".scroll-progress");
-
-window.addEventListener("scroll", function () {
-
-    if (!scrollProgress) {
-        return;
-    }
-
-    const scrollTop = window.scrollY;
-
-    const documentHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-
-    if (documentHeight <= 0) {
-        return;
-    }
-
-    const scrollPercentage =
-        (scrollTop / documentHeight) * 100;
-
-    scrollProgress.style.width =
-        scrollPercentage + "%";
-
-});
-
-
-/* 6. SCROLL REVEAL ANIMATION */
-
-const revealElements = document.querySelectorAll(
-    ".reveal, .reveal-left, .reveal-right, .reveal-scale"
-);
-
-if (revealElements.length > 0) {
-
-    const revealObserver = new IntersectionObserver(
-        function (entries, observer) {
-
-            entries.forEach(function (entry) {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("active");
-
-                    observer.unobserve(entry.target);
-
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.15
-        }
-    );
-
-    revealElements.forEach(function (element) {
-
-        revealObserver.observe(element);
-
-    });
-
-}
-
-
-/* 7. SMOOTH SCROLLING */
-
-const smoothScrollLinks = document.querySelectorAll(
-    'a[href^="#"]'
-);
-
-smoothScrollLinks.forEach(function (link) {
-
-    link.addEventListener("click", function (event) {
-
-        const targetId =
-            link.getAttribute("href");
-
-        if (!targetId || targetId === "#") {
-            return;
-        }
-
-        const targetElement =
-            document.querySelector(targetId);
-
-        if (!targetElement) {
-            return;
-        }
-
-        event.preventDefault();
-
-        targetElement.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    });
-
-});
-
-
-/* LOAD PRODUCTS FROM FASTAPI + POSTGRESQL */
-
-const productsGrid = document.getElementById("productsGrid");
-
-async function loadProducts() {
-
-    if (!productsGrid) {
-        console.warn("productsGrid element was not found.");
-        return;
-    }
-
-    try {
-
-        const response = await fetch(
-            `${API_BASE_URL}/api/products`
-        );
-
-        if (!response.ok) {
-            throw new Error(
-                "Product API returned HTTP " + response.status
-            );
-        }
-
-        const data = await response.json();
-
-        console.log("Product API response:", data);
-
-        if (
-            data.status !== "success" ||
-            !Array.isArray(data.products)
-        ) {
-            throw new Error("Invalid product data received.");
-        }
-
-        /* Clear the product grid */
-        productsGrid.innerHTML = "";
-
-        /* Create products */
-        data.products.forEach(function (product) {
-
-    const productCard = document.createElement("article");
-
-    productCard.className = "product-card";
-
-
-    /* GET ONLY THE IMAGE FILE NAME */
-
-    const fileName = product.image_url
-        .split("/")
-        .pop()
-        .trim();
-
-
-    /* BUILD CORRECT FRONTEND IMAGE URL */
-
-    const imagePath =
-        window.location.origin +
-        "/Images/products/" +
-        fileName;
-
-
-    console.log(
-        "Database image_url:",
-        product.image_url
-    );
-
-    console.log(
-        "Final image URL:",
-        imagePath
-    );
-
-
-    /* CREATE PRODUCT CARD */
-
-    productCard.innerHTML = `
-
-        <div class="product-image">
-
-            <img
-                src="${imagePath}"
-                alt="${product.name}"
-            >
-
-        </div>
-
-
-        <div class="product-content">
-
-            <span class="product-category">
-                ${product.category}
-            </span>
-
-            <h3>
-                ${product.name}
-            </h3>
-
-            <p>
-                ${product.description}
-            </p>
-
-            <a
-                href="#contact"
-                class="product-btn"
-            >
-                View Details
-                <span>→</span>
-            </a>
-
-        </div>
-
-    `;
-
-
-    /* IMAGE ERROR CHECK */
-
-    const productImage =
-        productCard.querySelector("img");
-
-
-    productImage.addEventListener(
-        "error",
-        function () {
-
-            console.error(
-                "IMAGE FAILED:",
-                imagePath
-            );
-
-        }
-    );
-
-
-    productImage.addEventListener(
-        "load",
-        function () {
-
-            console.log(
-                "IMAGE LOADED SUCCESSFULLY:",
-                imagePath
-            );
-
-        }
-    );
-
-
-    /* ADD CARD TO PAGE */
-
-    productsGrid.appendChild(productCard);
-
-});
-
-        console.log(
-            "Products loaded successfully:",
-            data.products.length
-        );
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Product loading error:",
-            error
-        );
-
-        productsGrid.innerHTML = `
-            <p class="product-error">
-                Unable to load products.
-                Please try again later.
-            </p>
-        `;
-
-    }
-
-}
-
-
-/* Start loading products */
-loadProducts();
 
 
 /* =========================================================
-   CONTACT FORM
+   DOM READY
    ========================================================= */
 
-const contactForm = document.getElementById("contactForm");
-const formMessage = document.getElementById("formMessage");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (contactForm) {
 
-    contactForm.addEventListener("submit", async function (event) {
+    /* =====================================================
+       MOBILE NAVIGATION
+       ===================================================== */
 
-        event.preventDefault();
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
 
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const subject = document.getElementById("subject").value.trim();
-        const message = document.getElementById("message").value.trim();
+    if (menuBtn && navLinks) {
 
-        const submitButton = contactForm.querySelector(
-            'button[type="submit"]'
+        menuBtn.addEventListener("click", function () {
+
+            navLinks.classList.toggle("active");
+            menuBtn.classList.toggle("active");
+
+            const expanded =
+                navLinks.classList.contains("active");
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                expanded ? "true" : "false"
+            );
+
+        });
+
+
+        navLinks.querySelectorAll("a").forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                navLinks.classList.remove("active");
+                menuBtn.classList.remove("active");
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            });
+
+        });
+
+    }
+
+
+    /* =====================================================
+       SMOOTH ANCHOR NAVIGATION
+       ===================================================== */
+
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(function (link) {
+
+            link.addEventListener("click", function (event) {
+
+                const targetId =
+                    link.getAttribute("href");
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
+
+                const target =
+                    document.querySelector(targetId);
+
+                if (!target) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            });
+
+        });
+
+
+    /* =====================================================
+       SCROLL PROGRESS
+       ===================================================== */
+
+    const scrollProgress =
+        document.querySelector(".scroll-progress");
+
+
+    function updateScrollProgress() {
+
+        if (!scrollProgress) {
+            return;
+        }
+
+        const scrollTop =
+            window.scrollY ||
+            document.documentElement.scrollTop;
+
+        const documentHeight =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+        const progress =
+            documentHeight > 0
+                ? (scrollTop / documentHeight) * 100
+                : 0;
+
+        scrollProgress.style.width =
+            Math.min(
+                100,
+                Math.max(0, progress)
+            ) + "%";
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateScrollProgress,
+        {
+            passive: true
+        }
+    );
+
+
+    updateScrollProgress();
+
+
+    /* =====================================================
+       SCROLL REVEAL ANIMATIONS
+       ===================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal, " +
+            ".reveal-left, " +
+            ".reveal-right, " +
+            ".reveal-scale"
         );
 
-        /* ---------------------------------------------------------
-           VALIDATION
-           --------------------------------------------------------- */
 
-        if (
-            name === "" ||
-            email === "" ||
-            subject === "" ||
-            message === ""
-        ) {
+    if ("IntersectionObserver" in window) {
 
-            formMessage.textContent =
-                "Please fill in all fields.";
+        const revealObserver =
+            new IntersectionObserver(
+                function (entries, observer) {
 
-            formMessage.className =
-                "form-message error";
+                    entries.forEach(function (entry) {
 
-            return;
-        }
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
 
-        /* ---------------------------------------------------------
-           EMAIL VALIDATION
-           --------------------------------------------------------- */
+                        entry.target.classList.add(
+                            "visible"
+                        );
 
-        const emailPattern =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        observer.unobserve(
+                            entry.target
+                        );
 
-        if (!emailPattern.test(email)) {
+                    });
 
-            formMessage.textContent =
-                "Please enter a valid email address.";
-
-            formMessage.className =
-                "form-message error";
-
-            return;
-        }
-
-        /* ---------------------------------------------------------
-           DISABLE BUTTON WHILE SUBMITTING
-           --------------------------------------------------------- */
-
-        submitButton.disabled = true;
-        submitButton.textContent = "Sending...";
-
-        formMessage.textContent =
-            "Sending message...";
-
-        formMessage.className =
-            "form-message";
-
-        /* ---------------------------------------------------------
-           SEND DATA TO FASTAPI
-           --------------------------------------------------------- */
-
-        try {
-
-            const response = await fetch(
-                `${API_BASE_URL}/api/contact`,
+                },
                 {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        subject: subject,
-                        message: message
-                    })
+                    threshold: 0.12,
+                    rootMargin:
+                        "0px 0px -50px 0px"
                 }
             );
 
-            const data = await response.json();
 
-            console.log("Contact API response:", data);
+        revealElements.forEach(function (element) {
 
-            /* -----------------------------------------------------
-               HANDLE BACKEND ERROR
-               ----------------------------------------------------- */
+            revealObserver.observe(element);
 
-            if (!response.ok || data.status === "error") {
+        });
 
-                throw new Error(
-                    data.message ||
-                    "Unable to submit the form."
-                );
-            }
+    } else {
 
-            /* -----------------------------------------------------
-               SUCCESS
-               ----------------------------------------------------- */
+        revealElements.forEach(function (element) {
 
-            formMessage.textContent =
-                "Thank you! Your message has been submitted successfully.";
+            element.classList.add(
+                "visible"
+            );
 
-            formMessage.className =
-                "form-message success";
+        });
 
-            contactForm.reset();
+    }
 
-            submitButton.disabled = false;
 
-            submitButton.textContent =
-                "Send Message →";
+    /* =====================================================
+       PRODUCT API
+       ===================================================== */
 
+    const productsGrid =
+        document.getElementById("productsGrid");
+
+
+    async function loadProducts() {
+
+        if (!productsGrid) {
+            console.warn(
+                "productsGrid element was not found."
+            );
+
+            return;
         }
 
-        /* ---------------------------------------------------------
-           ERROR
-           --------------------------------------------------------- */
 
-        catch (error) {
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE_URL}/api/products`
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Product API returned HTTP " +
+                    response.status
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Product API response:",
+                data
+            );
+
+
+            if (
+                data.status !== "success" ||
+                !Array.isArray(data.products)
+            ) {
+
+                throw new Error(
+                    "Invalid product data received."
+                );
+
+            }
+
+
+            productsGrid.innerHTML = "";
+
+
+            /* ---------------------------------------------
+               NO PRODUCTS
+               --------------------------------------------- */
+
+            if (data.products.length === 0) {
+
+                productsGrid.innerHTML = `
+                    <p class="product-error">
+                        No products are currently available.
+                    </p>
+                `;
+
+                return;
+
+            }
+
+
+            /* ---------------------------------------------
+               CREATE PRODUCT CARDS
+               --------------------------------------------- */
+
+            data.products.forEach(function (product) {
+
+
+                const productCard =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                productCard.className =
+                    "product-card";
+
+
+                /* -----------------------------------------
+                   GET IMAGE FILE NAME
+                   ----------------------------------------- */
+
+                const rawImage =
+                    product.image_url || "";
+
+
+                const fileName =
+                    rawImage
+                        .split("/")
+                        .pop()
+                        .trim();
+
+
+                /* -----------------------------------------
+                   PRODUCT IMAGE PATH
+
+                   Your structure:
+
+                   Frontend/
+                   ├── index.html
+                   ├── script.js
+                   ├── style.css
+                   └── Images/
+                       └── products/
+                           ├── product-1.jpg
+                           ├── product-2.jpg
+                           └── product-3.jpg
+
+                   Therefore the correct relative path is:
+
+                   Images/products/product-1.jpg
+                   ----------------------------------------- */
+
+                const imagePath =
+                    `Images/products/${fileName}`;
+
+
+                console.log(
+                    "Database image:",
+                    product.image_url
+                );
+
+
+                console.log(
+                    "Product image path:",
+                    imagePath
+                );
+
+
+                /* -----------------------------------------
+                   PRODUCT CARD HTML
+                   ----------------------------------------- */
+
+                productCard.innerHTML = `
+
+                    <div class="product-image">
+
+                        <img
+                            src="${imagePath}"
+                            alt="${escapeHtml(
+                                product.name
+                            )}"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <span class="product-category">
+
+                            ${escapeHtml(
+                                product.category ||
+                                "Medical Technology"
+                            )}
+
+                        </span>
+
+
+                        <h3>
+
+                            ${escapeHtml(
+                                product.name
+                            )}
+
+                        </h3>
+
+
+                        <p>
+
+                            ${escapeHtml(
+                                product.description ||
+                                ""
+                            )}
+
+                        </p>
+
+
+                        <a
+                            href="#contact"
+                            class="product-btn"
+                        >
+
+                            View Details
+
+                            <span>
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                `;
+
+
+                /* -----------------------------------------
+                   IMAGE ERROR HANDLING
+                   ----------------------------------------- */
+
+                const productImage =
+                    productCard.querySelector(
+                        ".product-image img"
+                    );
+
+
+                if (productImage) {
+
+                    productImage.addEventListener(
+                        "load",
+                        function () {
+
+                            console.log(
+                                "IMAGE LOADED:",
+                                imagePath
+                            );
+
+                        }
+                    );
+
+
+                    productImage.addEventListener(
+                        "error",
+                        function () {
+
+                            console.error(
+                                "IMAGE FAILED:",
+                                imagePath
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                productsGrid.appendChild(
+                    productCard
+                );
+
+            });
+
+
+            console.log(
+                "Products loaded successfully:",
+                data.products.length
+            );
+
+
+            /*
+             * Product cards are created dynamically,
+             * so attach cursor hover effects again.
+             */
+
+            attachCursorHoverTargets();
+
+
+        } catch (error) {
 
             console.error(
-                "Contact form error:",
+                "Product loading error:",
                 error
             );
 
-            formMessage.textContent =
-                "Unable to send your message. Please try again.";
 
-            formMessage.className =
-                "form-message error";
+            productsGrid.innerHTML = `
 
-            submitButton.disabled = false;
+                <p class="product-error">
 
-            submitButton.textContent =
-                "Send Message →";
+                    Unable to load products.
+                    Please try again later.
+
+                </p>
+
+            `;
+
         }
 
-    });
+    }
+
+
+    loadProducts();
+
+
+    /* =====================================================
+       CONTACT FORM
+       ===================================================== */
+
+    const contactForm =
+        document.getElementById(
+            "contactForm"
+        );
+
+
+    const formMessage =
+        document.getElementById(
+            "formMessage"
+        );
+
+
+    if (contactForm) {
+
+        contactForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                const submitButton =
+                    contactForm.querySelector(
+                        'button[type="submit"]'
+                    );
+
+
+                /* -----------------------------------------
+                   GET FORM VALUES
+                   ----------------------------------------- */
+
+                const name =
+                    document
+                        .getElementById("name")
+                        ?.value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        ?.value
+                        .trim();
+
+
+                const subject =
+                    document
+                        .getElementById("subject")
+                        ?.value
+                        .trim();
+
+
+                const message =
+                    document
+                        .getElementById("message")
+                        ?.value
+                        .trim();
+
+
+                /* -----------------------------------------
+                   EMPTY FIELD VALIDATION
+                   ----------------------------------------- */
+
+                if (
+                    !name ||
+                    !email ||
+                    !subject ||
+                    !message
+                ) {
+
+                    showFormMessage(
+                        "Please fill in all fields.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* -----------------------------------------
+                   EMAIL VALIDATION
+                   ----------------------------------------- */
+
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+                if (
+                    !emailPattern.test(email)
+                ) {
+
+                    showFormMessage(
+                        "Please enter a valid email address.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* -----------------------------------------
+                   DISABLE SUBMIT BUTTON
+                   ----------------------------------------- */
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        true;
+
+
+                    submitButton.dataset.originalText =
+                        submitButton.innerHTML;
+
+
+                    submitButton.innerHTML =
+                        "Sending...";
+
+                }
+
+
+                showFormMessage(
+                    "Sending your message...",
+                    "loading"
+                );
+
+
+                /* -----------------------------------------
+                   SEND DATA TO FASTAPI
+                   ----------------------------------------- */
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_BASE_URL}/api/contact`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        name:
+                                            name,
+
+                                        email:
+                                            email,
+
+                                        subject:
+                                            subject,
+
+                                        message:
+                                            message
+                                    })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (
+                        !response.ok ||
+                        data.status !== "success"
+                    ) {
+
+                        throw new Error(
+                            data.message ||
+                            "Unable to submit your message."
+                        );
+
+                    }
+
+
+                    /* -------------------------------------
+                       SUCCESS
+                       ------------------------------------- */
+
+                    showFormMessage(
+                        "Thank you. Your message has been sent successfully.",
+                        "success"
+                    );
+
+
+                    contactForm.reset();
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Contact form error:",
+                        error
+                    );
+
+
+                    showFormMessage(
+                        "Something went wrong. Please try again later.",
+                        "error"
+                    );
+
+
+                } finally {
+
+                    if (submitButton) {
+
+                        submitButton.disabled =
+                            false;
+
+
+                        submitButton.innerHTML =
+                            submitButton
+                                .dataset
+                                .originalText ||
+                            "Send Message →";
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       FORM MESSAGE FUNCTION
+       ===================================================== */
+
+    function showFormMessage(
+        message,
+        type
+    ) {
+
+        if (!formMessage) {
+            return;
+        }
+
+
+        formMessage.textContent =
+            message;
+
+
+        formMessage.className =
+            "form-message " +
+            type;
+
+    }
+
+
+    /* =====================================================
+       LIVE CURSOR AMBIENCE
+       ===================================================== */
+
+    initCursorAmbience();
+
+});
+
+
+/* =========================================================
+   HTML ESCAPE HELPER
+   ========================================================= */
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
-/* 11. PRODUCT BUTTONS / SMOOTH CONTACT SCROLL */
+/* =========================================================
+   LIVE CURSOR AMBIENCE
+   ========================================================= */
 
-document.addEventListener(
-    "click",
-    function (event) {
-
-        const productButton =
-            event.target.closest(".product-btn");
+function initCursorAmbience() {
 
 
-        if (!productButton) {
-            return;
-        }
+    /*
+     * Disable cursor ambience on touch devices.
+     */
 
+    if (
+        window.matchMedia &&
+        window.matchMedia(
+            "(hover: none), (pointer: coarse)"
+        ).matches
+    ) {
 
-        const contactSection =
-            document.getElementById("contact");
-
-
-        if (!contactSection) {
-            return;
-        }
-
-
-        event.preventDefault();
-
-
-        contactSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        return;
 
     }
-);
 
 
-/* 12. DEBUG INFORMATION */
+    /* ---------------------------------------------
+       CREATE CURSOR AMBIENCE ELEMENT
+       --------------------------------------------- */
 
-console.log(
-    "Perpetual Medtech JavaScript initialized."
-);
+    const ambience =
+        document.createElement(
+            "div"
+        );
+
+
+    ambience.className =
+        "cursor-ambience";
+
+
+    document.body.appendChild(
+        ambience
+    );
+
+
+    /* ---------------------------------------------
+       MOUSE POSITION
+       --------------------------------------------- */
+
+    let mouseX =
+        window.innerWidth / 2;
+
+
+    let mouseY =
+        window.innerHeight / 2;
+
+
+    let currentX =
+        mouseX;
+
+
+    let currentY =
+        mouseY;
+
+
+    /* ---------------------------------------------
+       MOUSE MOVE
+       --------------------------------------------- */
+
+    document.addEventListener(
+        "mousemove",
+        function (event) {
+
+            mouseX =
+                event.clientX;
+
+
+            mouseY =
+                event.clientY;
+
+
+            document.body.classList.add(
+                "cursor-active"
+            );
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ---------------------------------------------
+       MOUSE LEAVE
+       --------------------------------------------- */
+
+    document.addEventListener(
+        "mouseleave",
+        function () {
+
+            document.body.classList.remove(
+                "cursor-active"
+            );
+
+
+            document.body.classList.remove(
+                "cursor-hover"
+            );
+
+        }
+    );
+
+
+    /* ---------------------------------------------
+       HOVER TARGETS
+       --------------------------------------------- */
+
+    attachCursorHoverTargets();
+
+
+    /* ---------------------------------------------
+       ANIMATE CURSOR
+       --------------------------------------------- */
+
+    function animateCursor() {
+
+        currentX +=
+            (mouseX - currentX) *
+            0.12;
+
+
+        currentY +=
+            (mouseY - currentY) *
+            0.12;
+
+
+        ambience.style.left =
+            currentX + "px";
+
+
+        ambience.style.top =
+            currentY + "px";
+
+
+        requestAnimationFrame(
+            animateCursor
+        );
+
+    }
+
+
+    animateCursor();
+
+}
+
+
+/* =========================================================
+   CURSOR HOVER TARGETS
+   ========================================================= */
+
+function attachCursorHoverTargets() {
+
+
+    const targets =
+        document.querySelectorAll(
+            "a, " +
+            "button, " +
+            "input, " +
+            "textarea, " +
+            "select, " +
+            ".product-card, " +
+            ".feature-card, " +
+            ".research-card, " +
+            ".team-card"
+        );
+
+
+    targets.forEach(function (element) {
+
+
+        /*
+         * Prevent duplicate event listeners.
+         */
+
+        if (
+            element.dataset.cursorAttached ===
+            "true"
+        ) {
+
+            return;
+
+        }
+
+
+        element.dataset.cursorAttached =
+            "true";
+
+
+        /* -----------------------------------------
+           MOUSE ENTER
+           ----------------------------------------- */
+
+        element.addEventListener(
+            "mouseenter",
+            function () {
+
+                document.body.classList.add(
+                    "cursor-hover"
+                );
+
+            }
+        );
+
+
+        /* -----------------------------------------
+           MOUSE LEAVE
+           ----------------------------------------- */
+
+        element.addEventListener(
+            "mouseleave",
+            function () {
+
+                document.body.classList.remove(
+                    "cursor-hover"
+                );
+
+            }
+        );
+
+    });
+
+}
