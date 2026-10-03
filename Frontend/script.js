@@ -2,6 +2,7 @@
 
 
 /* 1. PAGE LOAD */
+const API_BASE_URL = "http://127.0.0.1:8000";
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -185,7 +186,7 @@ async function loadProducts() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/api/products"
+            `${API_BASE_URL}/api/products`
         );
 
         if (!response.ok) {
@@ -432,7 +433,7 @@ if (contactForm) {
         try {
 
             const response = await fetch(
-                "http://127.0.0.1:8000/api/contact",
+                `${API_BASE_URL}/api/contact`,
                 {
                     method: "POST",
 
