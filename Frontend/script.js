@@ -2,7 +2,7 @@
 
 
 /* 1. PAGE LOAD */
-const API_BASE_URL = "https://your-production-api.example";
+const API_BASE_URL = "https://perpetual-medtech.vercel.app";
 
 document.addEventListener("DOMContentLoaded", function () {
 
