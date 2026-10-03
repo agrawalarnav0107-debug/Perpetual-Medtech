@@ -1,32 +1,12 @@
-/* =========================================================
-   PERPETUAL MEDTECH — FINAL FRONTEND SCRIPT
-   =========================================================
-   Includes:
-   - Mobile navigation
-   - Smooth navigation
-   - Scroll progress
-   - Scroll reveal animations
-   - Product API loading
-   - Product image loading
-   - Contact form submission
-   - Form validation
-   - Live cursor ambience
-   - Cursor hover effects
-   ========================================================= */
-
 const API_BASE_URL = "https://perpetual-medtech.vercel.app";
 
 
-/* =========================================================
-   DOM READY
-   ========================================================= */
+/* DOM READY */
 
 document.addEventListener("DOMContentLoaded", function () {
 
 
-    /* =====================================================
-       MOBILE NAVIGATION
-       ===================================================== */
+    /* MOBILE NAVIGATION */
 
     const menuBtn = document.getElementById("menuBtn");
     const navLinks = document.getElementById("navLinks");
@@ -328,26 +308,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         .pop()
                         .trim();
 
-
-                /* -----------------------------------------
-                   PRODUCT IMAGE PATH
-
-                   Your structure:
-
-                   Frontend/
-                   ├── index.html
-                   ├── script.js
-                   ├── style.css
-                   └── Images/
-                       └── products/
-                           ├── product-1.jpg
-                           ├── product-2.jpg
-                           └── product-3.jpg
-
-                   Therefore the correct relative path is:
-
-                   Images/products/product-1.jpg
-                   ----------------------------------------- */
 
                 const imagePath =
                     `Images/products/${fileName}`;
