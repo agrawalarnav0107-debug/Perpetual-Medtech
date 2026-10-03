@@ -229,7 +229,7 @@ async function loadProducts() {
 
     const imagePath =
         window.location.origin +
-        "/Frontend/Images/products/" +
+        "/Images/products/" +
         fileName;
 
 
