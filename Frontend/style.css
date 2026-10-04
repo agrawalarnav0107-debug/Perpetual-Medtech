@@ -499,10 +499,10 @@ p {
 .hero h1 {
     max-width: 760px;
     color: var(--navy-950);
-    font-size: clamp(58px, 7.2vw, 104px);
+    font-size: clamp(58px, 7.2vw, 85px);
     font-weight: 800;
     letter-spacing: -.065em;
-    line-height: .92;
+    line-height: 1.05;
 }
 
 .hero-description {
