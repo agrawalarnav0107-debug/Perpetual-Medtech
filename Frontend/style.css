@@ -521,7 +521,7 @@ p {
     margin-top: 38px;
 }
 
-/* Small technical marker */
+/* Small technical marker 
 .hero-content::after {
     content: "PM / MEDTECH 01";
     position: absolute;
@@ -532,7 +532,7 @@ p {
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .20em;
-}
+} */
 
 /* =========================================================
    ABOUT / EXPERTISE
